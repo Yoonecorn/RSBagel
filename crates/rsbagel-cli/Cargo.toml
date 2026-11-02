@@ -1,0 +1,16 @@
+[package]
+name = "rsbagel-cli"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+
+[[bin]]
+name = "rsbagel"
+path = "src/main.rs"
+
+[dependencies]
+rsbagel-core = { path = "../rsbagel-core" }
+clap.workspace = true
+serde_json.workspace = true
+csv.workspace = true
+sha2 = "=0.10.9"
