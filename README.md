@@ -1,47 +1,100 @@
 # RSBagel
 
-RSBagel is a Rust implementation of BAGEL2 for Bayesian analysis of pooled CRISPR fitness screens.
+Rust implementation of the BAGEL2 scientific workflow for Bayesian analysis of pooled CRISPR fitness screens.
 
-**Supported source platform: Apple Silicon macOS (`aarch64-apple-darwin`).**
+**RSBagel is source-only software for Apple Silicon macOS.**
+
+Build RSBagel locally from source. No binary distribution or tagged release is currently provided.
 
 ## Documentation
 
-- [Quick Start](docs/RSBagel-Quick-Start.md): begin with the synthetic example.
-- [User Manual](docs/RSBagel-User-Manual.md): routine analysis and interpretation.
-- [Advanced CLI Reference](docs/RSBagel-Advanced-CLI-Reference.md): command options and profiles.
-- [Developer Integration Guide](docs/RSBagel-Developer-Integration-Guide.md): Rust and C integration.
-- [Manuscript](docs/RSBagel-Manuscript.pdf): methods, comparisons and limitations.
-- [Beginner example](examples/beginner/README.md) and [third-party notices](docs/BAGEL2-LICENSE.txt).
+- [Quick Start](docs/RSBagel-Quick-Start.md): build and run the beginner example.
+- [User Manual](docs/RSBagel-User-Manual.md): prepare inputs, run an analysis, and interpret results.
+- [Manuscript](docs/RSBagel-Manuscript.pdf): methods, comparisons, and limitations.
+- [Beginner example](examples/beginner/README.md): synthetic teaching data and expected outputs.
+
+For software integration, see the [Developer Integration Guide](developer/RSBagel-Developer-Integration-Guide.md). The [third-party notices](third-party-licenses/) are also included.
 
 ## What RSBagel does
 
-RSBagel calculates fold changes, gene Bayes factors and precision–recall results from guide count tables and reference gene sets. It provides a command-line interface, a Rust core and a C interface. Individual sgRNAs in a Brunello-style screen are separate observations; a four-guide single-target Inzolia-style array is one observation and must not be split into four artificial observations.
+- Calculates normalized fold changes from guide-count matrices.
+- Estimates gene Bayes factors using essential and nonessential reference sets.
+- Produces gene rankings and precision-recall summaries.
+- Supports individual-guide and single-target array observations.
+- Provides a command-line interface, Rust API, and C ABI.
 
-The default NumPy-compatible sampling profile follows the pinned BAGEL2 compatibility path. Native ChaCha8 sampling is deterministic and experimental; its stream does not reproduce NumPy draws. Observable agreement does not imply universal internal bitwise identity.
+Individual sgRNAs are separate observations in a Brunello-style screen. A four-guide single-target Inzolia-style array is one observation and must not be divided into four artificial observations.
+
+## How RSBagel works
+
+`fc` normalizes counts and calculates fold changes. `bf` uses reference sets to estimate gene Bayes factors. `pr` evaluates ranked genes against essential and nonessential reference sets.
+
+<p align="center"><img src="docs/images/RSBagel-Figure-1-Workflow.png" width="1000" alt="RSBagel workflow from guide counts through fold change, Bayes factors, ranking and precision-recall, with command-line, Rust and C interfaces"></p>
+
+*Figure 1. RSBagel preserves the BAGEL2 scientific contract across fold-change estimation, reference-set sampling, Bayes-factor estimation, gene ranking, and precision-recall analysis. One qualified engine supports the command-line interface, Rust API, and C ABI.*
+
+The compatibility contract includes sampling order, serialized precision, numerical aggregation, and tied-score ordering.
+
+## Validation and performance
+
+RSBagel achieved exact observable gene-rank agreement with BAGEL2 for the Brunello and Inzolia A375 analyses. The native ChaCha8 HAP1 analysis produced a nearly identical global ranking. Across the three evaluated workloads, RSBagel achieved an unweighted average acceleration of 22.13-fold and an unweighted average wall-time reduction of 95.45%.
+
+<p align="center"><img src="docs/images/RSBagel-Figure-2-Validation-Performance.png" width="1000" alt="Gene-rank agreement between RSBagel and BAGEL2 and complete-pipeline wall times for the evaluated Brunello, Inzolia and HAP1 workloads"></p>
+
+*Figure 2. Gene-rank agreement with BAGEL2 and complete-pipeline wall time on the evaluated Apple M4 Pro configurations. Brunello and Inzolia used the NumPy-compatible profile. HAP1 used native ChaCha8.*
+
+These results apply to the evaluated Apple M4 Pro configurations and workloads. They do not establish universal speedup, universal memory reduction, or universal internal bitwise identity. See the [manuscript](docs/RSBagel-Manuscript.pdf) for the complete methods and limitations.
 
 ## Requirements and installation
 
-Use an Apple Silicon Mac with Rust and Cargo installed. From a checkout, build the executable:
+Use an Apple Silicon Mac with Git, Rust and Cargo, and Apple command-line developer tools. Clone the private repository with an account that has access:
+
+```sh
+git clone https://github.com/Yoonecorn/RSBagel.git
+```
+
+Enter the checkout:
+
+```sh
+cd RSBagel
+```
+
+Use the default local Cargo output directory so the path below matches the build:
 
 ```sh
 unset CARGO_TARGET_DIR
+```
+
+Build the release executable for the supported target:
+
+```sh
 cargo build --release --locked --target aarch64-apple-darwin
 ```
 
-## Quick Start
-
-Follow the [Quick Start](docs/RSBagel-Quick-Start.md) for setup and the complete synthetic example. To inspect the executable from the repository root:
+Check the executable's help:
 
 ```sh
 target/aarch64-apple-darwin/release/rsbagel --help
 ```
 
-The example produces `results.foldchange`, `results.normed_readcount`, `results.bf`, and `results.pr`, plus metadata sidecars. The manual describes the columns and their interpretation.
+## Quick Start
+
+Follow the [Quick Start](docs/RSBagel-Quick-Start.md) to prepare and run the [beginner example](examples/beginner/README.md).
+
+## Inputs and outputs
+
+Routine inputs are a count matrix, an essential-gene list, and a nonessential-gene list. The main outputs are `results.foldchange`, `results.normed_readcount`, `results.bf`, and `results.pr`. See the [User Manual](docs/RSBagel-User-Manual.md) for field definitions and interpretation.
+
+## Sampling profiles
+
+NumPy-compatible mode is the default compatibility profile. Native ChaCha8 is deterministic and experimental. Replay mode uses a supplied partition plan for controlled reproduction. Equal numerical seeds do not imply identical random streams under different generators.
 
 ## Current limits
 
-Qualification applies to the tested macOS ARM64 source configuration and described datasets. Other platforms and the native sampling profile are not qualified. Scientific results depend on input quality, control sets and study design; computational agreement does not establish biological validity. Memory use and performance depend on workload.
+Source qualification is limited to the evaluated Apple Silicon macOS configuration; other operating systems are not qualified. Native ChaCha8 is not the default compatibility profile. Performance depends on workload, and faster execution does not guarantee lower memory use. Computational agreement does not establish biological validity.
 
 ## Citation and license
 
-Cite RSBagel by repository and exact commit, and cite BAGEL2 as described in the [manuscript](docs/RSBagel-Manuscript.pdf). No DOI is assigned here. RSBagel is licensed under the [MIT License](LICENSE); see the [BAGEL2](docs/BAGEL2-LICENSE.txt) and [NumPy](docs/NUMPY-LICENSE.txt) notices.
+Identify the [RSBagel repository](https://github.com/Yoonecorn/RSBagel) and the exact commit used, and refer to the [manuscript](docs/RSBagel-Manuscript.pdf). Cite BAGEL2: [Kim and Hart, Genome Medicine (2021)](https://doi.org/10.1186/s13073-020-00809-3).
+
+RSBagel is licensed under the [MIT License](LICENSE). See the [BAGEL2](third-party-licenses/BAGEL2-LICENSE.txt) and [NumPy](third-party-licenses/NUMPY-LICENSE.txt) notices.

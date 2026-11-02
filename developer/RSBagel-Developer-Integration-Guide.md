@@ -1,8 +1,8 @@
 # RSBagel Developer Integration Guide
 
 RSBagel 0.1.0. **Wet-lab users can skip this guide.** Use the
-[User Manual](RSBagel-User-Manual.md) for the routine workflow and the
-[Advanced CLI Reference](RSBagel-Advanced-CLI-Reference.md) for executable options.
+[User Manual](../docs/RSBagel-User-Manual.md) for the routine workflow.
+Use the executable’s `--help` option for command-line options.
 A repository is the source-code folder. A binary is a compiled program or library.
 
 These interfaces are for software integrators. Wet-lab users can skip this section.

@@ -36,7 +36,7 @@ Metadata means the recorded settings and input identities for a run.
 
 ## Installation
 
-This package runs on an Apple Silicon Mac. You do not need to install Rust, Python, or NumPy to run the supplied executable.
+This package runs on an Apple Silicon Mac. First build the executable and prepare the example folder using the [Quick Start](RSBagel-Quick-Start.md). Python and NumPy are not needed to run the built executable.
 
 1. Copy the complete supplied `RSBagel-example` folder to your `Desktop` in Finder.
 2. Keep its folder name unchanged.
@@ -56,8 +56,7 @@ directory. Expected output: none. Success means the prompt returns without an
 error. The explicit program path `./bin/rsbagel` needs no PATH setup. PATH is the
 list of folders searched for a program name. `./` means the current folder.
 
-The exact validation environment and support boundaries are in the
-[technical platform note](RSBagel-Advanced-CLI-Reference.md#technical-platform-note).
+Source qualification is limited to the evaluated Apple Silicon macOS configuration. See the [manuscript](RSBagel-Manuscript.pdf) for the validation environment and support boundaries.
 
 ## First analysis
 
@@ -267,8 +266,7 @@ The default needs no NumPy installation.
 
 Native ChaCha8 is an implemented deterministic mode. It is not the default compatibility profile and remains experimental.
 
-See the [advanced profile guidance](RSBagel-Advanced-CLI-Reference.md#sampling-profiles-and-experimental-native-mode)
-for explicit experimental use.
+For executable options, use `./bin/rsbagel bf --help`. Equal numerical seeds do not make the native and NumPy-compatible random streams identical.
 
 Use the positive pseudocount of 5, seed 42, default ten-fold cross-validation,
 and a positive worker count or `auto` for routine work. Use positive column
@@ -305,8 +303,7 @@ All are inside `outputs` for the example, or your chosen output folder for your 
 
 JSON is a structured text format for named values. You do not need to prepare
 JSON inputs. Retain the automatically written metadata files with the results.
-Optional technical fields and diagnostics are explained in the
-[advanced output reference](RSBagel-Advanced-CLI-Reference.md#diagnostic-outputs-raw-json-and-technical-output-fields).
+For optional command-line diagnostics, consult the relevant command’s `--help` output.
 
 ## Result interpretation
 
@@ -386,8 +383,7 @@ If several separately measured single-target arrays target one gene, retain each
 | Results change after a repeat | Check the exact files, generator, seed, columns, and settings. |
 
 A file can remain after an error. Stop if a command reports an error; file
-existence alone is not success. For specialist errors, use the
-[advanced troubleshooting reference](RSBagel-Advanced-CLI-Reference.md#advanced-troubleshooting).
+existence alone is not success. For specialist errors, retain the exact command and error text with the run metadata.
 
 ## Limitations, citation, and license
 
@@ -397,10 +393,10 @@ not prove biological truth or universal internal numerical identity. Native
 ChaCha8 retains its experimental qualification boundary. Performance and memory
 use depend on the workload; no universal memory reduction or RAM minimum is
 promised. Additional technical details are in the
-[Advanced CLI Reference](RSBagel-Advanced-CLI-Reference.md).
+[Developer Integration Guide](../developer/RSBagel-Developer-Integration-Guide.md).
 
 For the underlying method, the accepted bibliography lists Hart and Moffat (2016), BAGEL, DOI 10.1186/s12859-016-1015-8, and Kim and Hart (2021), BAGEL2, DOI 10.1186/s13073-020-00809-3. The accepted RSBagel manuscript title is “RSBagel Preserves the BAGEL2 Scientific Contract while Accelerating Pooled CRISPR Fitness-Screen Analysis.” Treat it as a local manuscript, not an already published article. Record the RSBagel version, source identity, and selected profile with your methods. A public RSBagel release DOI and finalized publication citation are not established by this local package. Do not invent one. Acknowledge the underlying BAGEL2 method using the accepted manuscript's BAGEL2 reference.
 
 RSBagel uses the MIT license. BAGEL2-derived behavior carries the Hart Lab MIT notice. Pinned NumPy indirect-sort semantics carry a BSD notice. The package includes the corresponding license texts. Keep these notices with redistributed copies.
 
-Wet-lab users can skip the [Developer Integration Guide](RSBagel-Developer-Integration-Guide.md).
+Wet-lab users can skip the [Developer Integration Guide](../developer/RSBagel-Developer-Integration-Guide.md).
