@@ -1,25 +1,34 @@
 # RSBagel Quick Start
 
-Use an Apple Silicon Mac and an RSBagel v1.0.0 source checkout. From the repository root, build the example program first:
+Use an Apple Silicon Mac and an RSBagel v1.0.0 source checkout. Open Terminal and run each command below from the repository root.
+
+Use the default build-output location:
 
 ```sh
 unset CARGO_TARGET_DIR
+```
+
+Build the program:
+
+```sh
 cargo build --release --locked --target aarch64-apple-darwin
+```
+
+Create the example’s `bin` folder:
+
+```sh
 mkdir -p examples/beginner/bin
+```
+
+Copy the built executable into the example:
+
+```sh
 cp target/aarch64-apple-darwin/release/rsbagel examples/beginner/bin/rsbagel
 ```
 
-Then copy `examples/beginner` to the Desktop and name the copy `RSBagel-example`.
+## Copy the folder
 
-## Copy the folder and open Terminal
-
-1. Copy the complete `RSBagel-example` folder to your `Desktop` in Finder.
-2. Keep its name exactly `RSBagel-example`.
-3. Press Command–Space.
-4. Type `Terminal`.
-5. Press Return.
-
-Terminal is the app where you type commands.
+In Finder, copy `examples/beginner` to your `Desktop`. Name the copied folder exactly `RSBagel-example`. Keep Terminal open for the next steps.
 
 ## Run the example
 
@@ -62,7 +71,7 @@ For explanations and your own data, use the [User Manual](RSBagel-User-Manual.md
 | Message or problem | Fix |
 |---|---|
 | `no such file or directory` | Put the complete folder on `Desktop` and check its exact name. Repeat the folder-selection command. |
-| `permission denied` | Ask the package provider for an intact copy with executable permissions preserved. |
+| `permission denied` | Rebuild and copy the executable as shown above; check that the script and executable have execute permission. |
 | macOS blocks the program | Follow your institution's approved process for local software. |
 | `Bad CPU type in executable` | Use an Apple Silicon Mac. |
 | `outputs already exists` | Move the old `outputs` folder elsewhere in Finder before repeating the run. |

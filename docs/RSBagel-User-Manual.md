@@ -38,7 +38,7 @@ Metadata means the recorded settings and input identities for a run.
 
 This package runs on an Apple Silicon Mac. First build the executable and prepare the example folder using the [Quick Start](RSBagel-Quick-Start.md). Python and NumPy are not needed to run the built executable.
 
-1. Copy the complete supplied `RSBagel-example` folder to your `Desktop` in Finder.
+1. After following the Quick Start, check that `RSBagel-example` is on your `Desktop`.
 2. Keep its folder name unchanged.
 3. Press Command–Space.
 4. Type `Terminal`.
@@ -348,7 +348,7 @@ This scores the same data and writes reagent-level rows. Expected output begins:
 Using column:  R1, R2
 ```
 
-The iteration table follows. Success creates `guides.bf` and `guides.bf.metadata.json`. The table begins `RNA`, `GENE`, the selected sample names, and `BF` for this cross-validation example. `RNA` is the reagent identifier, not a gene name. Additional output fields are explained in the advanced reference.
+The iteration table follows. Success creates `guides.bf` and `guides.bf.metadata.json`. The table begins `RNA`, `GENE`, the selected sample names, and `BF` for this cross-validation example. `RNA` is the reagent identifier, not a gene name. Use `./bin/rsbagel bf --help` for the available output options.
 
 Keep this table for guide inspection. Do not pass it directly to the gene-level PR workflow: the first column contains reagent IDs, and repeated gene labels do not turn reagent scores into a gene score table. Run gene-level `bf` separately to obtain the gene-level ranking.
 
@@ -371,7 +371,7 @@ If several separately measured single-target arrays target one gene, retain each
 | Problem | Action |
 |---|---|
 | The folder-selection command fails | Check that the complete `RSBagel-example` folder is on `Desktop`. |
-| Program not found or permission denied | Check the working folder and ask the provider for an intact executable copy. |
+| Program not found or permission denied | Check the working folder; rebuild and copy the executable using the Quick Start. |
 | macOS blocks the program or reports a wrong CPU type | Use an Apple Silicon Mac and follow your institution's local-software process. |
 | The example says `outputs already exists` | Move the previous `outputs` folder elsewhere in Finder before repeating it. |
 | A real-data output file already exists | Use a new empty output folder to avoid replacing earlier results. |

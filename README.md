@@ -47,7 +47,7 @@ These results apply to the evaluated Apple M4 Pro configurations and workloads. 
 
 ## Requirements and installation
 
-Use an Apple Silicon Mac with Git, Rust and Cargo, and Apple command-line developer tools. Clone the private repository with an account that has access:
+Use an Apple Silicon Mac with Git, Rust and Cargo, and Apple command-line developer tools. Clone the public repository:
 
 ```sh
 git clone https://github.com/Yoonecorn/RSBagel.git
