@@ -1,6 +1,6 @@
 # RSBagel Developer Integration Guide
 
-RSBagel 0.1.0. **Wet-lab users can skip this guide.** Use the
+RSBagel 1.0.0. **Wet-lab users can skip this guide.** Use the
 [User Manual](../docs/RSBagel-User-Manual.md) for the routine workflow.
 Use the executable’s `--help` option for command-line options.
 A repository is the source-code folder. A binary is a compiled program or library.
@@ -87,18 +87,18 @@ not make arbitrary memory corruption or process-aborting failure recoverable.
 
 The documented evidence platform is macOS arm64 / Rust 1.98 / Python 3.11.
 These interface contracts do not establish another platform or host UI.
-The supplied executable needs no Rust, Python, or NumPy installation.
+The locally built executable needs no Python or NumPy installation to run.
 NumPy-compatible sampling is the default for CLI, core and omitted C JSON fields.
 Explicit native ChaCha8 is implemented and deterministic but remains experimental,
-with the qualification boundary explained in the advanced reference.
+with the qualification boundary described in the manuscript.
 
 ## External HAP1 regression tests
 
-The two HAP1 regression tests are retained but ignored in an ordinary checkout because the approximately 56 MB external HAP1 golden dataset is intentionally excluded. They are not part of the clean-checkout passing test count. An authorized developer with the unchanged golden dataset can place it at `tests/golden/hap1-cv-final/` and the matching pinned BAGEL2 reference gene lists at `upstream/BAGEL2/CEGv2.txt` and `upstream/BAGEL2/NEGv1.txt`, then run from the repository root:
+The two HAP1 regression tests are retained but ignored in an ordinary checkout because the approximately 56 MB external HAP1 golden dataset is intentionally excluded. They are not part of the clean-checkout passing test count. An authorized developer with the unchanged golden dataset can set `RSBAGEL_HAP1_GOLDEN_DIR` to the fixture directory (for example `tests/external/hap1-golden/`) and the matching pinned BAGEL2 reference gene lists at `upstream/BAGEL2/CEGv2.txt` and `upstream/BAGEL2/NEGv1.txt`, then run from the repository root:
 
 ```sh
-cargo test --locked -p rsbagel-core bf::tests::hap1_replay_stages -- --ignored --exact
-cargo test --locked -p rsbagel-core resampling::tests::hap1_numpy_plan_matches_reference -- --ignored --exact
+RSBAGEL_HAP1_GOLDEN_DIR=tests/external/hap1-golden cargo test --locked -p rsbagel-core bf::tests::hap1_replay_stages -- --ignored --exact
+RSBAGEL_HAP1_GOLDEN_DIR=tests/external/hap1-golden cargo test --locked -p rsbagel-core resampling::tests::hap1_numpy_plan_matches_reference -- --ignored --exact
 ```
 
 These commands require the external fixtures; they do not download or regenerate them. The 1,000-iteration native bootstrap distributional gate is a bounded scientific qualification gate, not a routine software test. It is ignored in ordinary testing and was not run during this assembly. Only during an explicitly approved future qualification campaign, an authorized developer with the unchanged external qualification fixture at `tests/external/qualification/bootstrap1000/` can run:

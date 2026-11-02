@@ -1,6 +1,6 @@
 # RSBagel User Manual
 
-RSBagel 0.1.0. Start with the [Quick Start](RSBagel-Quick-Start.md) to run the supplied example.
+RSBagel 1.0.0. Start with the [Quick Start](RSBagel-Quick-Start.md) to run the supplied example.
 
 Most users need only three steps:
 
@@ -387,7 +387,7 @@ existence alone is not success. For specialist errors, retain the exact command 
 
 ## Limitations, citation, and license
 
-This manual covers RSBagel 0.1.0. The local package is not a public release.
+This manual covers RSBagel 1.0.0.
 Compatibility evidence applies to the documented inputs and settings. It does
 not prove biological truth or universal internal numerical identity. Native
 ChaCha8 retains its experimental qualification boundary. Performance and memory

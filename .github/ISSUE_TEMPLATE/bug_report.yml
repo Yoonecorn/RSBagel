@@ -1,0 +1,41 @@
+name: Bug report
+description: Report a reproducible RSBagel problem
+body:
+  - type: markdown
+    attributes:
+      value: Do not upload private, restricted, or sensitive datasets. For undisclosed vulnerabilities, follow SECURITY.md instead of filing a public issue.
+  - type: textarea
+    id: environment
+    attributes:
+      label: Version, macOS version, and Apple Silicon model
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command and input format description
+    validations:
+      required: true
+  - type: dropdown
+    id: profile
+    attributes:
+      label: Sampling profile
+      options:
+        - NumPy-compatible
+        - Native ChaCha8
+        - Replay
+        - Not applicable or unknown
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and observed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Minimal reproducible example using non-sensitive data
+    validations:
+      required: true

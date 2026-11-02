@@ -535,8 +535,13 @@ mod tests {
     #[test]
     #[ignore = "HAP1 regression fixture is not distributed in the snapshot"]
     fn hap1_numpy_plan_matches_reference() {
-        let path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
-            .join("../../tests/golden/hap1-cv-final/replay.json");
+        let path = std::env::var_os("RSBAGEL_HAP1_GOLDEN_DIR")
+            .map(std::path::PathBuf::from)
+            .unwrap_or_else(|| {
+                std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+                    .join("../../tests/external/hap1-golden")
+            })
+            .join("replay.json");
         let replay: crate::bf_types::ReplayManifest =
             serde_json::from_str(&std::fs::read_to_string(path).unwrap()).unwrap();
         // The same defaults are used for direct Rust callers and omitted C-ABI JSON fields.

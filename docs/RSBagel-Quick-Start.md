@@ -1,6 +1,6 @@
 # RSBagel Quick Start
 
-Use an Apple Silicon Mac and a source checkout. From the repository root, build the example program first:
+Use an Apple Silicon Mac and an RSBagel v1.0.0 source checkout. From the repository root, build the example program first:
 
 ```sh
 unset CARGO_TARGET_DIR

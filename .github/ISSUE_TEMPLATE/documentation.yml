@@ -1,0 +1,27 @@
+name: Documentation correction
+description: Report unclear or incorrect documentation
+body:
+  - type: input
+    id: location
+    attributes:
+      label: Affected document and section
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Current wording or behavior
+    validations:
+      required: true
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed correction
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Does this change command semantics or scientific interpretation?
+    validations:
+      required: true

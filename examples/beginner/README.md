@@ -2,7 +2,7 @@
 
 This is an offline teaching package for macOS on Apple Silicon (arm64).
 Read the [Quick Start](../../docs/RSBagel-Quick-Start.md) before running it.
-The executable is a locally built RSBagel 0.1.0 program, not a public release.
+The executable is a locally built RSBagel 1.0.0 program.
 Inputs are synthetic, not patient or experimental data.
 
 The three tab-separated input files contain 360 independent reagent observations

@@ -2,9 +2,9 @@
 
 Rust implementation of the BAGEL2 scientific workflow for Bayesian analysis of pooled CRISPR fitness screens.
 
-**RSBagel is source-only software for Apple Silicon macOS.**
+**RSBagel v1.0.0 is source-only software for Apple Silicon macOS.**
 
-Build RSBagel locally from source. No binary distribution or tagged release is currently provided.
+Build RSBagel locally from source. No binary distribution is provided.
 
 ## Documentation
 

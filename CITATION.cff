@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "Please cite the repository and the exact commit used."
 title: RSBagel
 type: software
-version: 0.1.0
+version: 1.0.0
 repository-code: "https://github.com/Yoonecorn/RSBagel"
 authors:
   - family-names: Yap

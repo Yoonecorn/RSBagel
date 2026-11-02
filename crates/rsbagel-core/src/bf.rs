@@ -502,7 +502,13 @@ mod tests {
         }
     }
     fn run_golden(name: &str, mode: Resampling) -> BfResult {
-        let dir = root().join("tests/golden").join(name);
+        let dir = if name.starts_with("hap1") {
+            std::env::var_os("RSBAGEL_HAP1_GOLDEN_DIR")
+                .map(PathBuf::from)
+                .unwrap_or_else(|| root().join("tests/external/hap1-golden"))
+        } else {
+            root().join("tests/golden").join(name)
+        };
         let m = load_matrix(&dir.join("reference.foldchange"));
         let (ess, non) = if name.starts_with("hap1") {
             (

@@ -330,7 +330,7 @@ dependencies = [
 
 [[package]]
 name = "rsbagel-cli"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "clap",
  "csv",
@@ -341,7 +341,7 @@ dependencies = [
 
 [[package]]
 name = "rsbagel-core"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "csv",
  "rand",
@@ -355,7 +355,7 @@ dependencies = [
 
 [[package]]
 name = "rsbagel-ffi"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "rsbagel-core",
  "serde_json",
